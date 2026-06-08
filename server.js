@@ -34,7 +34,7 @@ wss.on("connection", (ws, req) => {
   ws.on("message", (data) => {
     for (const peer of room) {
       if (peer !== ws && peer.readyState === peer.OPEN) {
-        peer.send(data);
+        peer.send(data instanceof Buffer ? data.toString() : data);
       }
     }
   });
